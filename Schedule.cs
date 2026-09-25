@@ -30,7 +30,15 @@ namespace Test
             _hour = ParsePart(timeParts[0], 0, 23);
             _minute = ParsePart(timeParts[1], 0, 59);
             _second = ParsePart(secondParts[0], 0, 59);
-            _millisecond = ParsePart(secondParts[1], 0, 999);
+
+            if (secondParts.Length > 1)
+            {
+                _millisecond = ParsePart(secondParts[1], 0, 999);
+            }
+            else
+            {
+                _millisecond = ParsePart("0", 0, 999);
+            }
         }
         private List<ScheduleRange> ParsePart(string text, int min, int max)
         {
@@ -92,6 +100,24 @@ namespace Test
                 }
             }
                 return ranges;
+        }
+        private void ParseTime(string time)
+        {
+            string[] timeParts = time.Split(':');
+            string[] secondParts = timeParts[2].Split('.');
+
+            _hour = ParsePart(timeParts[0], 0, 23);
+            _minute = ParsePart(timeParts[1], 0, 59);
+            _second = ParsePart(secondParts[0], 0, 59);
+
+            if (secondParts.Length > 1)
+            {
+                _millisecond = ParsePart(secondParts[1], 0, 999);
+            }
+            else
+            {
+                _millisecond = ParsePart("0", 0, 999);
+            }
         }
     }
 }
