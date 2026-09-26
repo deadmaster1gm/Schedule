@@ -129,6 +129,30 @@ namespace Test
                 _millisecond = ParsePart("0", 0, 999);
             }
         }
+
+        private bool Matches(List<ScheduleRange> ranges, int value)
+        {
+            foreach (ScheduleRange range in ranges)
+            {
+                if (range.Contains(value))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        private bool IsMatch (DateTime date)
+        {
+            return Matches(_years, date.Year) &&
+                   Matches(_months, date.Month) &&
+                   Matches(_days, date.Day) &&
+                   Matches(_dayOfweek, (int)date.DayOfWeek) &&
+                   Matches(_hour, date.Hour) &&
+                   Matches(_minute, date.Minute) &&
+                   Matches(_second, date.Second) &&
+                   Matches(_millisecond, date.Millisecond);
+        }
     }
 }
 

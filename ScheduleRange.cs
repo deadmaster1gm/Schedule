@@ -16,5 +16,11 @@ namespace Test
             To = to;
             Step = step;
         }
+        public bool Contains(int value)
+        {
+            return value >= From
+                && value <= To
+                && (value - From) % Step == 0;
+        }
     }
 }
